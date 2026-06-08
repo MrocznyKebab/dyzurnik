@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dyżurnik</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!--
+    TODO:
+    1. Sidebar: Rejestr dyżurów / Dodaj dyżur / Ustawienia.
+    2. Dashboard z kafelkami: godziny stacjonarne, pod telefonem, łącznie, do wypłaty.
+    3. Lista dyżurów z przyciskami Edytuj / Usuń.
+    4. Formularz dodawania i edycji dyżuru.
+    5. Ekran ustawień miejsc pracy.
+  -->
+
+  <aside class="sidebar">
+    <h1>Dyżurnik</h1>
+
+    <nav>
+      <button>Rejestr dyżurów</button>
+      <button>Dodaj dyżur</button>
+      <button>Ustawienia</button>
+    </nav>
+  </aside>
+
+  <main class="app">
+    <section id="dashboard">
+      <h2>Rejestr dyżurów</h2>
+
+      <div class="months">
+        <button>Czerwiec</button>
+        <button>Lipiec</button>
+        <button>Sierpień</button>
+      </div>
+
+      <div class="summary">
+        <div>Godziny stacjonarne: <strong>84 h</strong></div>
+        <div>Pod telefonem: <strong>36 h</strong></div>
+        <div>Łącznie godzin: <strong>120 h</strong></div>
+        <div>Do wypłaty: <strong>7800 zł</strong></div>
+      </div>
+
+      <div id="duties-list">
+        <!-- TODO: tutaj JS wyrenderuje listę dyżurów -->
+      </div>
+    </section>
+
+    <section id="duty-form">
+      <h2>Dodaj / edytuj dyżur</h2>
+
+      <!-- TODO: formularz ma mieć:
+        data,
+        godzina rozpoczęcia,
+        godzina zakończenia,
+        miejsce pracy,
+        godziny stacjonarne,
+        godziny pod telefonem.
+      -->
+    </section>
+
+    <section id="settings">
+      <h2>Ustawienia</h2>
+
+      <!-- TODO:
+        ustaw miejsca pracy:
+        nazwa miejsca,
+        stawka stacjonarna,
+        stawka pod telefonem,
+        wygląd aplikacji.
+      -->
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
