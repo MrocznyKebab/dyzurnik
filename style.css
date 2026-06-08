@@ -1,0 +1,41 @@
+/*
+  Dyżurnik — style aplikacji
+
+  TODO:
+  1. Layout z sidebarem.
+  2. Kafelki podsumowania.
+  3. Karty dyżurów.
+  4. Formularz dodawania/edycji.
+  5. Ustawienia miejsc pracy.
+  6. Responsywność.
+*/
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  width: 240px;
+}
+
+.app {
+  padding: 32px;
+}
+
+.summary {
+  display: flex;
+  gap: 16px;
+}
+
+.summary div {
+  padding: 20px;
+  background: #ddd;
+}
+
+.duty-card {
+  padding: 20px;
+  background: #222;
+  color: white;
+  border-radius: 16px;
+}
