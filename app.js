@@ -291,3 +291,19 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMonthFilters();
   renderDuties();
 });
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggle = document.getElementById('theme-toggle');
+  
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    if (themeToggle) themeToggle.textContent = 'Tryb jasny ☀️';
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    
+    themeToggle.textContent = isDark ? 'Tryb jasny ☀️' : 'Tryb ciemny 🌙';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+});
