@@ -1,41 +1,334 @@
-/*
-  Dyżurnik — style aplikacji
 
-  TODO:
-  1. Layout z sidebarem.
-  2. Kafelki podsumowania.
-  3. Karty dyżurów.
-  4. Formularz dodawania/edycji.
-  5. Ustawienia miejsc pracy.
-  6. Responsywność.
-*/
+:root {
+  --bg-app: #f8fafc;
+  --bg-sidebar: #0f172a;
+  --bg-card: #ffffff;
+  --text-main: #334155;
+  --text-muted: #64748b;
+  --text-light: #f8fafc;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --border-color: #e2e8f0;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --transition: all 0.2s ease-in-out;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  display: flex;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .sidebar {
-  width: 240px;
+  width: 260px;
+  background-color: var(--bg-sidebar);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  flex-shrink: 0;
+}
+
+.sidebar h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  letter-spacing: -0.05em;
+  color: #fff;
+  text-align: center;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar nav button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.sidebar nav button:hover,
+.sidebar nav button.active {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
 }
 
 .app {
-  padding: 32px;
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.app h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1e293b;
 }
 
 .summary {
-  display: flex;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
 }
 
 .summary div {
-  padding: 20px;
-  background: #ddd;
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.summary div strong {
+  display: block;
+  font-size: 1.75rem;
+  color: #0f172a;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.summary div:last-child strong {
+  color: #10b981;
+}
+
+.months {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.months button {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+.months button:hover {
+  background: #f1f5f9;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .duty-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
-  background: #222;
+  background: var(--bg-card);
+  color: var(--text-main);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.duty-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05);
+}
+
+.duty-card-info h4 {
+  font-size: 1.1rem;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.duty-card-info p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.duty-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Przyciski */
+button.btn-edit, button.btn-delete, button.btn-submit {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.875rem;
+}
+
+button.btn-edit {
+  background-color: #f1f5f9;
+  color: var(--text-main);
+}
+
+button.btn-edit:hover {
+  background-color: #e2e8f0;
+}
+
+button.btn-delete {
+  background-color: #fef2f2;
+  color: var(--danger);
+}
+
+button.btn-delete:hover {
+  background-color: var(--danger);
   color: white;
-  border-radius: 16px;
+}
+
+form {
+  background: var(--bg-card);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1xl 1fr;
+  gap: 16px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: #fff;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+button.btn-submit {
+  background-color: var(--primary);
+  color: white;
+  padding: 12px;
+  font-size: 1rem;
+}
+
+button.btn-submit:hover {
+  background-color: var(--primary-hover);
+}
+
+.settings-section {
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  margin-bottom: 24px;
+}
+
+.settings-section h3 {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .sidebar h1 {
+    margin-bottom: 16px;
+  }
+
+  .sidebar nav {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .sidebar nav button {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+  }
+
+  .app {
+    padding: 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .duty-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .duty-card-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
 }
