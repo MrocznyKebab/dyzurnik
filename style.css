@@ -368,3 +368,7 @@ body.dark-mode button.btn-edit {
 body.dark-mode button.btn-edit:hover {
   background-color: #475569;
 }
+
+body.dark-mode .app h2 {
+  color: #ffffff;
+}
