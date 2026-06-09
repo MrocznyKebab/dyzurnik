@@ -355,3 +355,16 @@ body.dark-mode .months button {
   background-color: #1e293b;
   color: #f8fafc;
 }
+
+body.dark-mode .duty-card-info h4 {
+  color: #ffffff;
+}
+
+body.dark-mode button.btn-edit {
+  background-color: #334155;
+  color: #f8fafc;
+}
+
+body.dark-mode button.btn-edit:hover {
+  background-color: #475569;
+}
