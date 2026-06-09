@@ -332,3 +332,26 @@ button.btn-submit:hover {
     justify-content: flex-end;
   }
 }
+body.dark-mode {
+  --bg-app: #0f172a;
+  --bg-sidebar: #020617;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+}
+
+body.dark-mode .summary div strong {
+  color: #ffffff;
+}
+
+body.dark-mode input, 
+body.dark-mode select {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+body.dark-mode .months button {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
