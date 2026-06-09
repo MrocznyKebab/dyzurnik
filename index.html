@@ -8,70 +8,91 @@
 </head>
 <body>
 
-  <!--
-    TODO:
-    1. Sidebar: Rejestr dyżurów / Dodaj dyżur / Ustawienia.
-    2. Dashboard z kafelkami: godziny stacjonarne, pod telefonem, łącznie, do wypłaty.
-    3. Lista dyżurów z przyciskami Edytuj / Usuń.
-    4. Formularz dodawania i edycji dyżuru.
-    5. Ekran ustawień miejsc pracy.
-  -->
-
   <aside class="sidebar">
     <h1>Dyżurnik</h1>
-
     <nav>
-      <button>Rejestr dyżurów</button>
-      <button>Dodaj dyżur</button>
-      <button>Ustawienia</button>
+      <button id="nav-dashboard" class="active">Rejestr dyżurów</button>
+      <button id="nav-form">Dodaj dyżur</button>
+      <button id="nav-settings">Ustawienia</button>
     </nav>
   </aside>
 
   <main class="app">
-    <section id="dashboard">
+    <section id="dashboard" class="view">
       <h2>Rejestr dyżurów</h2>
 
-      <div class="months">
-        <button>Czerwiec</button>
-        <button>Lipiec</button>
-        <button>Sierpień</button>
-      </div>
-
       <div class="summary">
-        <div>Godziny stacjonarne: <strong>84 h</strong></div>
-        <div>Pod telefonem: <strong>36 h</strong></div>
-        <div>Łącznie godzin: <strong>120 h</strong></div>
-        <div>Do wypłaty: <strong>7800 zł</strong></div>
+        <div class="tile">Godziny stacjonarne: <br><strong id="sum-stat">0 h</strong></div>
+        <div class="tile">Pod telefonem: <br><strong id="sum-call">0 h</strong></div>
+        <div class="tile">Łącznie godzin: <br><strong id="sum-total">0 h</strong></div>
+        <div class="tile">Do wypłaty: <br><strong id="sum-pay">0 zł</strong></div>
       </div>
 
-      <div id="duties-list">
-        <!-- TODO: tutaj JS wyrenderuje listę dyżurów -->
-      </div>
+      <div id="duties-list" class="list-container">
+        </div>
     </section>
 
-    <section id="duty-form">
-      <h2>Dodaj / edytuj dyżur</h2>
-
-      <!-- TODO: formularz ma mieć:
-        data,
-        godzina rozpoczęcia,
-        godzina zakończenia,
-        miejsce pracy,
-        godziny stacjonarne,
-        godziny pod telefonem.
-      -->
+    <section id="duty-form" class="view hidden">
+      <h2 id="form-title">Dodaj dyżur</h2>
+      
+      <form id="form-add-duty">
+        <input type="hidden" id="duty-id">
+        <div class="form-group">
+          <label>Data</label>
+          <input type="date" id="duty-date" required>
+        </div>
+        <div class="form-group row">
+          <div>
+            <label>Rozpoczęcie</label>
+            <input type="time" id="duty-start" required>
+          </div>
+          <div>
+            <label>Zakończenie</label>
+            <input type="time" id="duty-end" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Miejsce pracy</label>
+          <select id="duty-workplace" required>
+            </select>
+        </div>
+        <div class="form-group row">
+          <div>
+            <label>Godz. stacjonarne</label>
+            <input type="number" step="0.5" id="duty-stat" required>
+          </div>
+          <div>
+            <label>Godz. pod telefonem</label>
+            <input type="number" step="0.5" id="duty-call" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Zapisz dyżur</button>
+      </form>
     </section>
 
-    <section id="settings">
+    <section id="settings" class="view hidden">
       <h2>Ustawienia</h2>
 
-      <!-- TODO:
-        ustaw miejsca pracy:
-        nazwa miejsca,
-        stawka stacjonarna,
-        stawka pod telefonem,
-        wygląd aplikacji.
-      -->
+      <div class="settings-card">
+        <h3>Wygląd aplikacji</h3>
+        <label>
+          <input type="checkbox" id="theme-toggle"> 
+          Włącz ciemny motyw (Dark Mode)
+        </label>
+      </div>
+
+      <div class="settings-card">
+        <h3>Dodaj miejsce pracy</h3>
+        <form id="form-add-workplace" class="row">
+          <input type="text" id="wp-name" placeholder="Nazwa miejsca" required>
+          <input type="number" id="wp-stat-rate" placeholder="Stawka stacjonarna (zł/h)" required>
+          <input type="number" id="wp-call-rate" placeholder="Stawka pod tel (zł/h)" required>
+          <button type="submit" class="btn-primary">Dodaj</button>
+        </form>
+      </div>
+
+      <div id="workplaces-list" class="list-container">
+        </div>
     </section>
   </main>
 
