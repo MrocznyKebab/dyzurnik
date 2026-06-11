@@ -373,11 +373,20 @@ body.dark-mode .app h2 {
   color: #ffffff;
 }
 .settled-label {
-  display: inline-flex;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   margin-top: 10px;
+  width: fit-content;
   font-size: 14px;
   color: var(--text-muted);
   cursor: pointer;
+}
+
+.settled-label input {
+  margin: 0;
+  width: 16px;
+  height: 16px;
 }
