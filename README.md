@@ -71,7 +71,8 @@ Dodatkowo ustawienia mogą zawierać:
 - miesięczne podsumowanie godzin,
 - miesięczne podsumowanie kwoty,
 - ustawienia miejsc pracy ze stawkami,
-- zapis danych w localStorage.
+- zapis danych w localStorage.\
+- oznaczenie dyżuru jako "rozliczony"
 
 ## Nie robimy w MVP
 
