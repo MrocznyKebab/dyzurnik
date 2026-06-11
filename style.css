@@ -372,3 +372,12 @@ body.dark-mode button.btn-edit:hover {
 body.dark-mode .app h2 {
   color: #ffffff;
 }
+.settled-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
