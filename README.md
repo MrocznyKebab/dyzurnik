@@ -1,5 +1,10 @@
 # Dyżurnik
 
+## Link do aplikacji
+
+https://mrocznykebab.github.io/dyzurnik/
+
+
 Aplikacja do zapisywania i rozliczania dyżurów.
 
 ## Link do Figmy
