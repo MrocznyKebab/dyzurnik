@@ -4,7 +4,7 @@ const defaultWorkplaces = [
 ];
 
 const defaultDuties = [
-{ 
+  { 
     id: 1, 
     date: "2026-09-12", 
     startTime: "07:00", 
@@ -13,7 +13,7 @@ const defaultDuties = [
     stationaryHours: 8, 
     onCallHours: 4,
     settled: false
-}
+  }
 ];
 
 let workplaces = JSON.parse(localStorage.getItem('workplaces')) || defaultWorkplaces;
@@ -126,12 +126,23 @@ function renderDuties() {
         <h4>${duty.date} — ${wpName}</h4>
         <p>Godziny: ${duty.startTime} - ${duty.endTime} | Stacjonarnie: <strong>${duty.stationaryHours}h</strong> | Pod telefonem: <strong>${duty.onCallHours}h</strong></p>
         <p style="margin-top: 4px; color: #10b981; font-weight: 600;">Zarobek: ${totalPay} zł</p>
+
+        <label class="settled-label">
+          <input 
+            type="checkbox" 
+            ${duty.settled ? 'checked' : ''} 
+            onchange="handleToggleSettled(${duty.id})"
+          >
+          Rozliczony
+        </label>
       </div>
+
       <div class="duty-card-actions">
         <button class="btn-edit" onclick="handleEditDuty(${duty.id})">Edytuj</button>
         <button class="btn-delete" onclick="handleDeleteDuty(${duty.id})">Usuń</button>
       </div>
     `;
+
     listContainer.appendChild(card);
   });
 
@@ -167,7 +178,11 @@ dutyForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const idValue = document.getElementById('duty-id').value;
-  
+
+  const existingDuty = idValue
+    ? duties.find(d => d.id === Number(idValue))
+    : null;
+
   const dutyData = {
     id: idValue ? Number(idValue) : Date.now(),
     date: document.getElementById('duty-date').value,
@@ -175,7 +190,8 @@ dutyForm.addEventListener('submit', (e) => {
     endTime: document.getElementById('duty-end').value,
     workplaceId: Number(document.getElementById('duty-workplace').value),
     stationaryHours: Number(document.getElementById('duty-stat').value),
-    onCallHours: Number(document.getElementById('duty-call').value)
+    onCallHours: Number(document.getElementById('duty-call').value),
+    settled: existingDuty ? existingDuty.settled : false
   };
 
   if (idValue) {
@@ -203,8 +219,8 @@ window.handleEditDuty = function(id) {
   document.getElementById('duty-end').value = duty.endTime;
   
   populateWorkplaceSelect();
+
   document.getElementById('duty-workplace').value = duty.workplaceId;
-  
   document.getElementById('duty-stat').value = duty.stationaryHours;
   document.getElementById('duty-call').value = duty.onCallHours;
 };
@@ -215,6 +231,17 @@ window.handleDeleteDuty = function(id) {
     saveData();
     renderDuties();
   }
+};
+
+window.handleToggleSettled = function(id) {
+  const duty = duties.find(d => d.id === id);
+
+  if (!duty) return;
+
+  duty.settled = !duty.settled;
+
+  saveData();
+  renderDuties();
 };
 
 function setupMonthFilters() {
@@ -235,11 +262,16 @@ function setupMonthFilters() {
         btn.style.backgroundColor = '';
         btn.style.color = '';
       } else {
-        monthButtons.forEach(b => { b.style.backgroundColor = ''; b.style.color = ''; });
+        monthButtons.forEach(b => {
+          b.style.backgroundColor = '';
+          b.style.color = '';
+        });
+
         selectedMonthFilter = targetMonth;
         btn.style.backgroundColor = 'var(--primary)';
         btn.style.color = 'white';
       }
+
       renderDuties();
     });
   });
@@ -250,22 +282,25 @@ const workplaceForm = document.getElementById('form-add-workplace');
 if (workplaceForm) {
   workplaceForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
     const newWp = {
       id: Date.now(),
       name: document.getElementById('wp-name').value,
       stationaryRate: Number(document.getElementById('wp-stat-rate').value),
       onCallRate: Number(document.getElementById('wp-call-rate').value)
     };
+
     workplaces.push(newWp);
     saveData();
     workplaceForm.reset();
-    renderWorkplaces();
+    renderSettingsWorkplaces();
   });
 }
 
 function renderSettingsWorkplaces() {
   const container = document.getElementById('workplaces-list');
   if (!container) return;
+
   container.innerHTML = '';
 
   workplaces.forEach(wp => {
@@ -279,6 +314,7 @@ function renderSettingsWorkplaces() {
       </div>
       <button class="btn-delete" onclick="handleDeleteWorkplace(${wp.id})">Usuń</button>
     `;
+
     container.appendChild(item);
   });
 }
@@ -300,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMonthFilters();
   renderDuties();
 });
+
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   
@@ -310,6 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   themeToggle?.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
+
     const isDark = document.body.classList.contains('dark-mode');
     
     themeToggle.textContent = isDark ? 'Tryb jasny ☀️' : 'Tryb ciemny 🌙';
