@@ -4,7 +4,16 @@ const defaultWorkplaces = [
 ];
 
 const defaultDuties = [
-  { id: 1, date: "2026-09-12", startTime: "07:00", endTime: "19:00", workplaceId: 1, stationaryHours: 8, onCallHours: 4 }
+{ 
+    id: 1, 
+    date: "2026-09-12", 
+    startTime: "07:00", 
+    endTime: "19:00", 
+    workplaceId: 1, 
+    stationaryHours: 8, 
+    onCallHours: 4,
+    settled: false
+}
 ];
 
 let workplaces = JSON.parse(localStorage.getItem('workplaces')) || defaultWorkplaces;
